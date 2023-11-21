@@ -1,0 +1,17 @@
+﻿<Window x:Class="LCDaansturen.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LCDaansturen"
+        mc:Ignorable="d"
+        Title="LCD aansturen" SizeToContent="Height" Width="600" Closing="Window_Closing">
+    <StackPanel Margin="10">
+        <GroupBox Header="COM-poort instellen">
+            <ComboBox Name="cbxComPorts" Margin="10"
+               SelectionChanged="cbxComPorts_SelectionChanged"></ComboBox>
+        </GroupBox>
+        
+        
+    </StackPanel>
+</Window>
