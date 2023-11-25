@@ -11,7 +11,24 @@
             <ComboBox Name="cbxComPorts" Margin="10"
                SelectionChanged="cbxComPorts_SelectionChanged"></ComboBox>
         </GroupBox>
-        
-        
+        <GroupBox Header="CLOCK">
+            <Label Name="lblclock" HorizontalAlignment="Left" FontSize="20" >...</Label>
+        </GroupBox>
+        <GroupBox Header="DATUM">
+            <Label Name="lbldatum" HorizontalAlignment="Left" FontSize="20" >...</Label>
+        </GroupBox>
+        <GroupBox Header="TIMER">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200"></ColumnDefinition>
+                    <ColumnDefinition Width="200"></ColumnDefinition>
+                    <ColumnDefinition Width="200"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button HorizontalAlignment="Center" FontSize="15" Click="Button_Click" Content="START" Width="70"></Button>
+                <Label Name="lbltimer" HorizontalAlignment="Center" FontSize="20" Grid.Column="1">...</Label>
+                <Button HorizontalAlignment="Center" FontSize="15" Click="Button_Click_1"  Content="STOP" Width="70" Grid.Column="2"></Button>
+            </Grid>
+        </GroupBox>
+
     </StackPanel>
 </Window>

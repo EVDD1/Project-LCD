@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "+kZj7LNpFw3K2PAoB0jwtzY/VGLavimbYucqinv0cOTtSVcX+60Yi0DwDI1XtXJaicnIgp2cJt/NtquEOTyI1A==",
+  "dgSpecHash": "mivnIKEGDmYKuBwELnq3beM4aAB5XfKlwHoWV614s42lr6bletUQh02lrTl1Pb9tQtpcUTXpg3dxHV91uGO98Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\emiel\\OneDrive\\Documenten\\LCDaansturen\\project\\code\\LCDaansturen\\LCDaansturen\\LCDaansturen.csproj",
+  "projectFilePath": "C:\\Users\\emiel\\OneDrive\\Documenten\\visual studio\\LCDaansturen\\project\\code\\LCDaansturen\\LCDaansturen\\LCDaansturen.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\emiel\\.nuget\\packages\\runtime.linux-arm.runtime.native.system.io.ports\\8.0.0\\runtime.linux-arm.runtime.native.system.io.ports.8.0.0.nupkg.sha512",
     "C:\\Users\\emiel\\.nuget\\packages\\runtime.linux-arm64.runtime.native.system.io.ports\\8.0.0\\runtime.linux-arm64.runtime.native.system.io.ports.8.0.0.nupkg.sha512",

@@ -238,11 +238,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\emiel\\OneDrive\\Documenten\\LCDaansturen\\project\\code\\LCDaansturen\\LCDaansturen\\LCDaansturen.csproj",
+      "projectUniqueName": "C:\\Users\\emiel\\OneDrive\\Documenten\\visual studio\\LCDaansturen\\project\\code\\LCDaansturen\\LCDaansturen\\LCDaansturen.csproj",
       "projectName": "LCDaansturen",
-      "projectPath": "C:\\Users\\emiel\\OneDrive\\Documenten\\LCDaansturen\\project\\code\\LCDaansturen\\LCDaansturen\\LCDaansturen.csproj",
+      "projectPath": "C:\\Users\\emiel\\OneDrive\\Documenten\\visual studio\\LCDaansturen\\project\\code\\LCDaansturen\\LCDaansturen\\LCDaansturen.csproj",
       "packagesPath": "C:\\Users\\emiel\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\emiel\\OneDrive\\Documenten\\LCDaansturen\\project\\code\\LCDaansturen\\LCDaansturen\\obj\\",
+      "outputPath": "C:\\Users\\emiel\\OneDrive\\Documenten\\visual studio\\LCDaansturen\\project\\code\\LCDaansturen\\LCDaansturen\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\emiel\\AppData\\Roaming\\NuGet\\NuGet.Config",
