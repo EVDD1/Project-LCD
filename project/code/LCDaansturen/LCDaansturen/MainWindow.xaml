@@ -11,24 +11,59 @@
             <ComboBox Name="cbxComPorts" Margin="10"
                SelectionChanged="cbxComPorts_SelectionChanged"></ComboBox>
         </GroupBox>
-        <GroupBox Header="CLOCK">
-            <Label Name="lblclock" HorizontalAlignment="Left" FontSize="20" >...</Label>
-        </GroupBox>
-        <GroupBox Header="DATUM">
-            <Label Name="lbldatum" HorizontalAlignment="Left" FontSize="20" >...</Label>
-        </GroupBox>
-        <GroupBox Header="TIMER">
+       
+            <GroupBox Header="CLOCK">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="200"></ColumnDefinition>
                     <ColumnDefinition Width="200"></ColumnDefinition>
                     <ColumnDefinition Width="200"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
+                <Label Name="lblclock" HorizontalAlignment="Left" FontSize="20" Margin="10" >...</Label>
+                <Button Click="Button_Click_3" Content="Doorsturen" Grid.Column="1" Margin="10"></Button>
+            </Grid>
+
+            </GroupBox>
+
+        <GroupBox Header="DATUM">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="300"></ColumnDefinition>
+                    <ColumnDefinition Width="200"></ColumnDefinition>
+                    <ColumnDefinition Width="100"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Label Name="lbldatum" HorizontalAlignment="Left" FontSize="20" Margin="10">...</Label>
+                <Button Click="Button_Click_4" Content="Doorsturen" Grid.Column="1" Margin="10"></Button>
+            </Grid>
+
+        </GroupBox>
+   
+        <GroupBox Header="TIMER">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200"></ColumnDefinition>
+                    <ColumnDefinition Width="100"></ColumnDefinition>
+                    <ColumnDefinition Width="100"></ColumnDefinition>
+                    <ColumnDefinition Width="100"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
                 <Button HorizontalAlignment="Center" FontSize="15" Click="Button_Click" Content="START" Width="70"></Button>
                 <Label Name="lbltimer" HorizontalAlignment="Center" FontSize="20" Grid.Column="1">...</Label>
                 <Button HorizontalAlignment="Center" FontSize="15" Click="Button_Click_1"  Content="STOP" Width="70" Grid.Column="2"></Button>
+                <Button HorizontalAlignment="Center" FontSize="15" Click="Button_Click_5"  Content="RESET" Width="70" Grid.Column="3"></Button>
             </Grid>
         </GroupBox>
+        <GroupBox Header="TEKST">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200"></ColumnDefinition>
+                    <ColumnDefinition Width="200"></ColumnDefinition>
+                    <ColumnDefinition Width="200"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
 
+                <TextBox Name="txtbxtekst"  FontSize="20" Grid.Column="0" Margin="10" MaxLength="10"  ></TextBox>
+                <Button Click="Button_Click_2" Grid.Column="1" Margin="10" Content="Doorsturen"></Button>
+                <Label Name="lbltekst" Grid.Column="2" FontSize="20" HorizontalAlignment="Center" Margin="10" >...</Label>
+            </Grid>
+        </GroupBox>
     </StackPanel>
 </Window>
