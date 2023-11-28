@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LCDaansturen"
         mc:Ignorable="d"
-        Title="LCD aansturen" SizeToContent="Height" Width="600" Closing="Window_Closing">
+        Title="LCD aansturen" SizeToContent="Height" Width="700" Closing="Window_Closing">
     <StackPanel Margin="10">
         <GroupBox Header="COM-poort instellen">
             <ComboBox Name="cbxComPorts" Margin="10"
@@ -19,8 +19,9 @@
                     <ColumnDefinition Width="200"></ColumnDefinition>
                     <ColumnDefinition Width="200"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Label Name="lblclock" HorizontalAlignment="Left" FontSize="20" Margin="10" >...</Label>
-                <Button Click="Button_Click_3" Content="Doorsturen" Grid.Column="1" Margin="10"></Button>
+                <Button Click="Button_Click_3" Content="Doorsturen" Grid.Column="0" Margin="10"></Button>
+                <Label Name="lblclock" HorizontalAlignment="Left" FontSize="20" Margin="10" Grid.Column="1" >...</Label>
+               
             </Grid>
 
             </GroupBox>
@@ -28,12 +29,12 @@
         <GroupBox Header="DATUM" IsEnabled="False" Name="grpdtm">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="300"></ColumnDefinition>
+                    <ColumnDefinition Width="200"></ColumnDefinition>
                     <ColumnDefinition Width="200"></ColumnDefinition>
                     <ColumnDefinition Width="100"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Label Name="lbldatum" HorizontalAlignment="Left" FontSize="20" Margin="10">...</Label>
-                <Button Click="Button_Click_4" Content="Doorsturen" Grid.Column="1" Margin="10"></Button>
+                <Label Name="lbldatum" HorizontalAlignment="Left" FontSize="20" Margin="10" Grid.Column="1">...</Label>
+                <Button Click="Button_Click_4" Content="Doorsturen" Grid.Column="0" Margin="10"></Button>
             </Grid>
 
         </GroupBox>
@@ -41,15 +42,15 @@
         <GroupBox Header="TIMER" IsEnabled="False" Name="grptim">
             <Grid>
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"></ColumnDefinition>
                     <ColumnDefinition Width="200"></ColumnDefinition>
-                    <ColumnDefinition Width="100"></ColumnDefinition>
-                    <ColumnDefinition Width="100"></ColumnDefinition>
-                    <ColumnDefinition Width="100"></ColumnDefinition>
+                    <ColumnDefinition Width="200"></ColumnDefinition>
+                    <ColumnDefinition Width="150"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Button HorizontalAlignment="Center" FontSize="15" Click="Button_Click" Content="START" Width="70"></Button>
-                <Label Name="lbltimer" HorizontalAlignment="Center" FontSize="20" Grid.Column="1">...</Label>
-                <Button HorizontalAlignment="Center" FontSize="15" Click="Button_Click_1"  Content="STOP" Width="70" Grid.Column="2"></Button>
-                <Button HorizontalAlignment="Center" FontSize="15" Click="Button_Click_5"  Content="RESET" Width="70" Grid.Column="3"></Button>
+                <Button Margin="10" FontSize="15" Click="Button_Click_7" Content="STUUR" Grid.Column="0"></Button>
+                <Button Margin="10" FontSize="15" Click="Button_Click" Content="START" Grid.Column="1"></Button>
+                <Button Margin="10" FontSize="15" Click="Button_Click_1"  Content="STOP"  Grid.Column="2"></Button>
+                <Button Margin="10" FontSize="15" Click="Button_Click_5"  Content="RESET"  Grid.Column="3"></Button>
             </Grid>
         </GroupBox>
         <GroupBox Header="TEKST"  IsEnabled="False" Name="grptkst">
@@ -57,7 +58,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="200"></ColumnDefinition>
                     <ColumnDefinition Width="200"></ColumnDefinition>
-                    <ColumnDefinition Width="200"></ColumnDefinition>
+                    <ColumnDefinition Width="250"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
 
                 <TextBox Name="txtbxtekst"  FontSize="20" Grid.Column="0" Margin="10" MaxLength="16"  ></TextBox>
@@ -65,5 +66,6 @@
                 <Label Name="lbltekst" Grid.Column="2" FontSize="20" HorizontalAlignment="Center" Margin="10" >...</Label>
             </Grid>
         </GroupBox>
+        <Button Content="RESET" Click="Button_Click_6" Margin="10" IsEnabled="False" Name="resetknop"></Button>
     </StackPanel>
 </Window>

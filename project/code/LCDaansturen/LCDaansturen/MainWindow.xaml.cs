@@ -1,23 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO.Ports;
-using System.Linq;
-using System.Security.Cryptography.Pkcs;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Markup;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Windows.Threading;
+using System.Xml.Schema;
 
 namespace LCDaansturen
 {
@@ -28,11 +14,15 @@ namespace LCDaansturen
     {
         //Klasses
         SerialPort serialport;
+        DispatcherTimer klok;
         DispatcherTimer timer;
-        DispatcherTimer timer1;
+        DispatcherTimer datum;
         Tekst tekst;
         int count = 0;
-       
+        string clock;
+        int minuten = 0;
+        int start = 0;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -47,53 +37,38 @@ namespace LCDaansturen
             foreach (string poort in SerialPort.GetPortNames())
                 cbxComPorts.Items.Add(poort);
 
+            /////////////////////////////////////////////////////////////////
+
+            //een object aanmaken voor de datum en tijd
+            klok = new DispatcherTimer();
+
+            //event aanmaken
+            klok.Tick += Timer_Tick;
+
+            //ticken om de seconde
+            klok.Interval = TimeSpan.FromSeconds(1);
+
+            ////////////////////////////////////////////////////////////////
+
             //een object aanmaken voor de datum en tijd
             timer = new DispatcherTimer();
 
             //event aanmaken
-            timer.Tick += Timer_Tick;
+            timer.Tick += Timer1_Tick;
 
             //ticken om de seconde
             timer.Interval = TimeSpan.FromSeconds(1);
 
-            //timer starten
-            timer.Start();
+            ////////////////////////////////////////////////////////////////
 
-            //een object aanmaken voor de datum en tijd
-            timer1 = new DispatcherTimer();
+            datum = new DispatcherTimer();
 
-            //event aanmaken
-            timer1.Tick += Timer1_Tick;
+            datum.Tick += Datum_Tick;
 
-            //ticken om de seconde
-            timer1.Interval = TimeSpan.FromSeconds(1);
+            datum.Interval = TimeSpan.FromSeconds(1);
 
-            //Nul op de label zetten
-            lbltimer.Content = "0";
 
         }
-
-        private void Timer1_Tick(object? sender, EventArgs e)
-        {
-          //per tick count optellen voor de timer
-          lbltimer.Content =  count++;
-
-            if ((serialport != null) && (serialport.IsOpen))
-            {
-                serialport.WriteLine(Convert.ToString(count));
-
-            }
-        }
-
-        private void Timer_Tick(object? sender, EventArgs e)
-        {
-           
-            //klok
-            lblclock.Content = DateTime.Now.ToLongTimeString();
-            //datum
-            lbldatum.Content = DateTime.Now.ToShortDateString();
-        }
-
         private void cbxComPorts_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             //Als er geen COM-poort is dan mag het niet doorgaan
@@ -119,6 +94,7 @@ namespace LCDaansturen
                     grpdtm.IsEnabled=true;
                     grptim.IsEnabled=true;
                     grptkst.IsEnabled=true;
+                    resetknop.IsEnabled=true;
 
                 }
                 if (cbxComPorts.SelectedItem.ToString() == "None")
@@ -128,34 +104,75 @@ namespace LCDaansturen
                     grpdtm.IsEnabled = false;
                     grptim.IsEnabled = false;
                     grptkst.IsEnabled = false;
-
+                    resetknop.IsEnabled = false;
                 }
             }
         }
+        private void Button_Click_7(object sender, RoutedEventArgs e)
+        {
+            //je moet eerst op stuur klikken vooraleer je op start kan klikken
+            start++;
+            if ((serialport != null) && (serialport.IsOpen))
+            {
+                serialport.WriteLine(Convert.ToString($"{count}s"));
 
-     
+            }
+        }
+
+        private void Timer1_Tick(object? sender, EventArgs e)
+        {
+
+                //per tick count optellen voor de timer
+                count++;
+
+                //Als er 1 seconde voorbij is dan moet er 1 minuut op komen
+                if (count > 60)
+                {
+                    count = 0;
+                    minuten++;
+                }
+
+                if ((serialport != null) && (serialport.IsOpen) && (minuten == 0))
+                {
+                    serialport.WriteLine(Convert.ToString($"{count}s"));
+
+                }
+                if ((serialport != null) && (serialport.IsOpen) && (minuten > 0))
+                {
+
+                    serialport.WriteLine(Convert.ToString($"{minuten}m:{count}s"));
+
+                }
+            
+        }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            timer1.Start();
-
+            //Als je op stuur geklikt hebt dan kan je op start drukken
+            if (start > 0)
+            {
+                //timer start
+                timer.Start();
+            }
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-           timer1.Stop();
+            //timer stoppen
+           timer.Stop();
         }
         private void Button_Click_5(object sender, RoutedEventArgs e)
         {
-            lbltimer.Content = "0";
             count = 0;
-            timer1.Stop();
+            minuten = 0;
+            timer.Stop();
 
             if ((serialport != null) && (serialport.IsOpen))
             {
-                serialport.WriteLine(Convert.ToString(count));
+                serialport.WriteLine(Convert.ToString($"{count}s"));
 
             }
+     
         }
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
@@ -176,36 +193,83 @@ namespace LCDaansturen
             txtbxtekst.Clear();
         }
 
-        private void Button_Click_3(object sender, RoutedEventArgs e)
+
+        private void Timer_Tick(object? sender, EventArgs e)
         {
-          
-
-
+           
+            //klok
+            lblclock.Content = DateTime.Now.ToLongTimeString();
             if ((serialport != null) && (serialport.IsOpen))
             {
-                serialport.WriteLine(Convert.ToString(lblclock.Content));
+                serialport.WriteLine(Convert.ToString(DateTime.Now.ToLongTimeString()));
 
             }
+
+        }
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            klok.Start();
+        }
+
+        private void Datum_Tick(object? sender, EventArgs e)
+        {
+            //datum
+            lbldatum.Content = DateTime.Now.ToShortDateString();
+            if ((serialport != null) && (serialport.IsOpen))
+            {
+                serialport.WriteLine(Convert.ToString(DateTime.Now.ToShortDateString()));
+            }
+          
         }
 
         private void Button_Click_4(object sender, RoutedEventArgs e)
         {
-            //Als je de datum wil doorsturen
            
+           datum.Start();
 
-            if ((serialport != null) && (serialport.IsOpen))
-            {
-                serialport.WriteLine(Convert.ToString(lbldatum.Content));
-            }
+         
         }
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            //ALs je het scherm sluit mag er niets meer op het scherm staan
+            if ((serialport != null) && (serialport.IsOpen))
+            {
+                serialport.WriteLine(Convert.ToString(""));
+            }
+
             if ((serialport != null) && serialport.IsOpen)
             {
                 serialport.Write(new byte[] { 0 }, 0, 1);
                 serialport.Dispose();
             }
+
         }
 
+        private void Button_Click_6(object sender, RoutedEventArgs e)
+        {
+            //LCD resetten
+            if ((serialport != null) && (serialport.IsOpen))
+            {
+                serialport.WriteLine(Convert.ToString(""));
+            }
+            //timer resetten
+            start = 0;
+            timer.Stop();
+            count = 0;
+            minuten = 0;
+
+            //klok resetten
+            klok.Stop();
+            lblclock.Content = "";
+            //datum resetten
+            datum.Stop();
+            lbldatum.Content = "";
+
+            //tekst resetten
+            lbltekst.Content = "";
+
+        }
+
+       
     }
 }
