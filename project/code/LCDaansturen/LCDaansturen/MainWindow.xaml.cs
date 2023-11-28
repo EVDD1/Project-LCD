@@ -75,15 +75,23 @@ namespace LCDaansturen
 
         private void Timer1_Tick(object? sender, EventArgs e)
         {
+          //per tick count optellen voor de timer
           lbltimer.Content =  count++;
+
+            if ((serialport != null) && (serialport.IsOpen))
+            {
+                serialport.WriteLine(Convert.ToString(count));
+
+            }
         }
 
         private void Timer_Tick(object? sender, EventArgs e)
         {
+           
             //klok
             lblclock.Content = DateTime.Now.ToLongTimeString();
             //datum
-            lbldatum.Content = DateTime.Now.ToLongDateString();
+            lbldatum.Content = DateTime.Now.ToShortDateString();
         }
 
         private void cbxComPorts_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -105,18 +113,27 @@ namespace LCDaansturen
                     serialport.PortName = cbxComPorts.SelectedItem.ToString();
                     //seriële poort openen
                     serialport.Open();
+
+                    //Als je een com-poort hebt aangeduid dan moeten ze aangaan
+                    grpclk.IsEnabled=true;
+                    grpdtm.IsEnabled=true;
+                    grptim.IsEnabled=true;
+                    grptkst.IsEnabled=true;
+
+                }
+                if (cbxComPorts.SelectedItem.ToString() == "None")
+                {
+                    //Als er geen com-poort is aangeduid alles uitzetten
+                    grpclk.IsEnabled = false;
+                    grpdtm.IsEnabled = false;
+                    grptim.IsEnabled = false;
+                    grptkst.IsEnabled = false;
+
                 }
             }
         }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            if ((serialport != null) && serialport.IsOpen)
-            {
-                serialport.Write(new byte[] { 0 }, 0, 1);
-                serialport.Dispose();
-            }
-        }
+     
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -133,6 +150,12 @@ namespace LCDaansturen
             lbltimer.Content = "0";
             count = 0;
             timer1.Stop();
+
+            if ((serialport != null) && (serialport.IsOpen))
+            {
+                serialport.WriteLine(Convert.ToString(count));
+
+            }
         }
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
@@ -146,32 +169,43 @@ namespace LCDaansturen
            
             if ((serialport != null) && (serialport.IsOpen))
             {
-                serialport.WriteLine(txtbxtekst.Text);
+                serialport.WriteLine(tekst.toevoegen());
             }
+
+
+            txtbxtekst.Clear();
         }
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
-            //ALs je de klok wil doorsturen
-            byte data = Convert.ToByte( lblclock.Content);
+          
+
 
             if ((serialport != null) && (serialport.IsOpen))
             {
-                serialport.Write(new byte[] { data }, 0, 1);
+                serialport.WriteLine(Convert.ToString(lblclock.Content));
+
             }
         }
 
         private void Button_Click_4(object sender, RoutedEventArgs e)
         {
             //Als je de datum wil doorsturen
-            byte data = Convert.ToByte(lbldatum.Content);
+           
 
             if ((serialport != null) && (serialport.IsOpen))
             {
-                serialport.Write(new byte[] { data }, 0, 1);
+                serialport.WriteLine(Convert.ToString(lbldatum.Content));
+            }
+        }
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if ((serialport != null) && serialport.IsOpen)
+            {
+                serialport.Write(new byte[] { 0 }, 0, 1);
+                serialport.Dispose();
             }
         }
 
-     
     }
 }

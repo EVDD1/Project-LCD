@@ -13,7 +13,7 @@ namespace LCDaansturen
 		public string Info
 		{
 			get { return info; }
-			set { info = value; }
+			set { info = value.ToUpper(); }
 		}
 
 		public string toevoegen()
