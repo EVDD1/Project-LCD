@@ -154,6 +154,11 @@ namespace LCDaansturen
                 //timer start
                 timer.Start();
             }
+            if(start == 0)
+            {
+                //Je moet eerst op stuur drukken
+                MessageBox.Show("Eerst op stuur drukken!","Fout",MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -176,21 +181,27 @@ namespace LCDaansturen
         }
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            //als je een tekst wil doorsturen
-            tekst = new Tekst();
-
-            tekst.Info = txtbxtekst.Text;
-
-            lbltekst.Content = tekst.toevoegen();
-
-           
-            if ((serialport != null) && (serialport.IsOpen))
+            if (txtbxtekst.Text != "")
             {
-                serialport.WriteLine(tekst.toevoegen());
+                //als je een tekst wil doorsturen
+                tekst = new Tekst();
+
+                tekst.Info = txtbxtekst.Text;
+
+                lbltekst.Content = tekst.toevoegen();
+
+
+                if ((serialport != null) && (serialport.IsOpen))
+                {
+                    serialport.WriteLine(tekst.toevoegen());
+                }
+
+                //maakt de textbox weer leeg
+                txtbxtekst.Clear();
             }
-
-
-            txtbxtekst.Clear();
+            else 
+            //als er niets instaat dan een melding geven
+            MessageBox.Show("Tekstvak is leeg!","Fout",MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
 
