@@ -262,7 +262,7 @@ namespace LCDaansturen
         private void Button_Click_8(object sender, RoutedEventArgs e)
         {
 
-            lblwkkr.Content = "";
+            txtbxwkkr.Clear();
             wekker.Start();
 
             if(DateTime.TryParse(txtbxwkkr.Text, out DateTime tijd))  

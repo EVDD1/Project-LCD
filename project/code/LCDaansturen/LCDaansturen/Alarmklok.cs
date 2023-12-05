@@ -17,16 +17,9 @@ namespace LCDaansturen
 			set { alarmtime = value; }
 		}
 
-		private int alarmduur;
-
 		public void startalarm(DateTime time)
 		{
 			alarmtime = time;
-		}
-
-		public void startalarmduur(int seconds) 
-		{
-			alarmduur = seconds;
 		}
 
 		public bool IsAlarmTijdKlaar()
