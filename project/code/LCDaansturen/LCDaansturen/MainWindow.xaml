@@ -25,7 +25,26 @@
             </Grid>
 
             </GroupBox>
+     
 
+        <GroupBox Header="WEKKER" IsEnabled="False" Name="grpwkkr">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200"></ColumnDefinition>
+                    <ColumnDefinition Width="100"></ColumnDefinition>
+                    <ColumnDefinition Width="150"></ColumnDefinition>
+                    <ColumnDefinition Width="150"></ColumnDefinition>
+                  
+                </Grid.ColumnDefinitions>
+                <TextBox Name="txtbxwkkr" Grid.Column="0" Margin="10" FontSize="20"></TextBox>
+                <Button Click="Button_Click_8"  Content="Doorsturen" Grid.Column="1" Margin="10"></Button>
+                <Label Name="lblwkkr" HorizontalAlignment="Left" FontSize="20" Margin="10" Grid.Column="2" >...</Label>
+                <Label Name="lblwkkrklok" HorizontalAlignment="Left" FontSize="20" Margin="10" Grid.Column="3" >...</Label>
+             
+
+            </Grid>
+
+        </GroupBox>
         <GroupBox Header="DATUM" IsEnabled="False" Name="grpdtm">
             <Grid>
                 <Grid.ColumnDefinitions>

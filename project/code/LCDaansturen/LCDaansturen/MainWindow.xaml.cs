@@ -18,6 +18,8 @@ namespace LCDaansturen
         DispatcherTimer timer;
         DispatcherTimer datum;
         Tekst tekst;
+        Alarmklok alarmklok;
+        DispatcherTimer wekker;
         int count = 0;
         string clock;
         int minuten = 0;
@@ -67,8 +69,19 @@ namespace LCDaansturen
 
             datum.Interval = TimeSpan.FromSeconds(1);
 
+            ////////////////////////////////////////////////////////
+            
+            alarmklok = new Alarmklok();
+
+            wekker = new DispatcherTimer();
+
+            wekker.Tick += Wekker_Tick;
+
+            wekker.Interval = TimeSpan.FromSeconds(1);
 
         }
+
+
         private void cbxComPorts_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             //Als er geen COM-poort is dan mag het niet doorgaan
@@ -95,6 +108,7 @@ namespace LCDaansturen
                     grptim.IsEnabled=true;
                     grptkst.IsEnabled=true;
                     resetknop.IsEnabled=true;
+                    grpwkkr.IsEnabled=true;
 
                 }
                 if (cbxComPorts.SelectedItem.ToString() == "None")
@@ -105,6 +119,7 @@ namespace LCDaansturen
                     grptim.IsEnabled = false;
                     grptkst.IsEnabled = false;
                     resetknop.IsEnabled = false;
+                    grpwkkr.IsEnabled = false;
                 }
             }
         }
@@ -217,6 +232,45 @@ namespace LCDaansturen
             }
 
         }
+
+        private void Wekker_Tick(object? sender, EventArgs e)
+        {
+            string klok = DateTime.Now.ToLongTimeString();
+
+            lblwkkrklok.Content = klok;
+
+            string wekker1 = alarmklok.Alarmtime.ToLongTimeString();
+            lblwkkr.Content = wekker1;
+
+            if ((serialport != null) && (serialport.IsOpen))
+            {
+                serialport.WriteLine(Convert.ToString(DateTime.Now.ToLongTimeString()));
+            }
+
+            if (wekker1 == klok)
+            {
+                wekker.Stop();
+                if ((serialport != null) && (serialport.IsOpen))
+                {
+                    serialport.WriteLine(Convert.ToString("WEKKER!"));
+                }
+               
+
+             
+            }
+        }
+        private void Button_Click_8(object sender, RoutedEventArgs e)
+        {
+
+            lblwkkr.Content = "";
+            wekker.Start();
+
+            if(DateTime.TryParse(txtbxwkkr.Text, out DateTime tijd))  
+             alarmklok.startalarm(tijd);
+        }
+
+
+
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
             klok.Start();
@@ -279,8 +333,10 @@ namespace LCDaansturen
             //tekst resetten
             lbltekst.Content = "";
 
+            wekker.Stop();
+
         }
 
-       
+     
     }
 }
