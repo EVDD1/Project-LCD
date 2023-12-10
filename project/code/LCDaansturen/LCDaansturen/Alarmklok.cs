@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO.Ports;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,16 +18,22 @@ namespace LCDaansturen
 			set { alarmtime = value; }
 		}
 
-		public void startalarm(DateTime time)
+		public void Startalarm(DateTime time)
 		{
 			alarmtime = time;
 		}
 
+	
 		public bool IsAlarmTijdKlaar()
 		{
-		
+
+			//vergelijkt de huidige tijd met de alarm tijd
 			int tijd = DateTime.Compare(DateTime.Now, alarmtime);
+			
+			//kijkt of de huidige tijd later is dan de alarmtijd
+			//en dan returned het true
 			return tijd > 0;
-		}
+        
+        }
     }
 }
