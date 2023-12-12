@@ -39,7 +39,7 @@
                 <TextBox Name="txtbxwkkr" Grid.Column="0" Margin="10" FontSize="20" ToolTip="00:00:00"></TextBox>
                 <Button Click="WEKKER_Click"  Content="Doorsturen" Grid.Column="1" Margin="10"></Button>
                 <Label Name="lblwkkr" HorizontalAlignment="Left" FontSize="20" Margin="10" Grid.Column="2" >...</Label>
-                <Label Name="lblwkkrklok" HorizontalAlignment="Left" FontSize="20" Margin="10" Grid.Column="3" >...</Label>
+                <Label Name="lblwkkrklok" HorizontalAlignment="Left" FontSize="20" Margin="10" Grid.Column="3" ></Label>
              
 
             </Grid>
@@ -80,7 +80,7 @@
                     <ColumnDefinition Width="250"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
 
-                <TextBox Name="txtbxtekst"  FontSize="20" Grid.Column="0" Margin="10" MaxLength="16"  ></TextBox>
+                <TextBox Name="txtbxtekst"  FontSize="20" Grid.Column="0" Margin="10" MaxLength="16" ToolTip="Vul hier een tekst in."  ></TextBox>
                 <Button Click="TEKST_Click" Grid.Column="1" Margin="10" Content="Doorsturen"></Button>
                 <Label Name="lbltekst" Grid.Column="2" FontSize="20" HorizontalAlignment="Center" Margin="10" >...</Label>
             </Grid>

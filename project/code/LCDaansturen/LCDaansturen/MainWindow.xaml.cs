@@ -21,10 +21,10 @@ namespace LCDaansturen
         Tekst tekst;
         Alarmklok alarmklok;
         DispatcherTimer wekker;
+        //variablen
         int seconden = 0;
         int minuten = 0;
         int start = 0;
-        int WekkerDelay = 10000;// 10s delay
         int wekkerduur = 10;
         public MainWindow()
         {
@@ -269,8 +269,7 @@ namespace LCDaansturen
         /////////////////////////////////////////////////////////////////////////////////
         private void Wekker_Tick(object? sender, EventArgs e)
         {
-            //De tijd in de string klok zetten
-            lblwkkrklok.Content = DateTime.Now.ToLongTimeString();
+        
 
             //De tijd dat er is ingesteld komt in de string wekker1
             lblwkkr.Content = alarmklok.Alarmtime.ToLongTimeString();
@@ -284,11 +283,12 @@ namespace LCDaansturen
             
             //Als het TRUE is dan komt er wekker op de lcd
             if(alarmklok.IsAlarmTijdKlaar())
-            {   
+            {
+
+                lblwkkr.Content = "";
                 //timer stoppen
                 wekker.Stop();
-                lblwkkrklok.Content = "";
-                lblwkkr.Content = "";
+           
 
                 for (int i = 0; i < wekkerduur; i++)
                 {
